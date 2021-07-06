@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main class="container mt-3 mb-5">
+	<!-- featured news -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-7">
+			<div class="card mb-3 shadow" >
+			    <a href="/detail/{{first_posts.id}}">
+					<img src="media/{{first_posts.img}}" class="card-img-top" alt="{{first_posts.title}}">
+				</a>
+			    <div class="card-body">
+					<h6 class="card-title"><a href="/detail/{{first_posts.id}}">{{first_posts.title}}</a></h6>
+					<p class="card-title"><a href="/detail/{{first_posts.id}}">{{first_posts.pub_date|date:"d/m/Y - H:i"}}</a></p>
+					<hr>
+					<p class="card-title"><a href="/detail/{{first_posts.id}}">{{first_posts.describe}}</a></p>
+			    </div>
+			</div>
+		</div>
+		<!-- Right -->
+
+		<div class="col-md-5">
+			<div class="card-footer">
+				<h5>BẢN TIN KHÁC</h5>
+				<hr>
+			</div>
+
+			{% for post in all_posts %}
+			<!-- News Box -->
+			<div class="card">
+                <div class="row no-gutters">
+                     <div class="col-md-4">
+						 <a href="/detail/{{post.id}}">
+							 <img src="media/{{post.img}}" class="card-img-top" alt="{{post.title}}">
+						 </a>
+                     </div>
+                     <div class="col-md-8">
+                          <div class="card-body">
+							  <h6 class="card-title"><a href="/detail/{{post.id}}">{{post.title}}</a></h6>
+							  <p class="card-title"><a href="/detail/{{posts.id}}">{{post.pub_date|date:"d/m/Y - H:i"}}</a></p>
+							  <hr>
+							  <p class="card-text"><a href="/detail/{{post.id}}" class="btn btn-sm btn-primary">Xem chi tiết</a></p>
+                          </div>
+                     </div>
+                </div>
+			</div>
+			<hr/>
+			{% endfor %}
+
+			<!--Pagination-->
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-end">
+				{% if all_posts.has_previous %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ all_posts.previous_page_number }}">«</a>
+				  	</li>
+				{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
+				 	</li>
+				{% endif %}
+
+				{% if all_posts.number|add:'-3' > 1 %}
+					<li class="page-item"><a class="page-link" href="?page={{ all_posts.number|add:'-4' }}">&hellip;</a></li>
+				{% endif %}
+
+				{% for i in all_posts.paginator.page_range %}
+					{% if all_posts.number == i %}
+						<li class="page-item active" aria-current="page">
+							<span class="page-link">{{ i }}</span>
+						</li>
+					{% elif i > all_posts.number|add:'-4' and i < all_posts.number|add:'4' %}
+						<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+					{% endif %}
+				{% endfor %}
+
+				{% if all_posts.paginator.num_pages > all_posts.number|add:'3' %}
+				   <li class="page-item"><a class="page-link" href="?page={{ all_posts.number|add:'4' }}">&hellip;</a></li>
+				{% endif %}
+
+				{% if all_posts.has_next %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ all_posts.next_page_number }}">»</a>
+				 	</li>
+				{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">»</a>
+				  	</li>
+				{% endif %}
+			  </ul>
+			</nav>
+    		<!--end of Pagination-->
+		</div>
+	</div>
+	</main>
+{% endblock %}

@@ -1,0 +1,90 @@
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+.navbar {
+	background-color: rgba(0,69,138,0.9) !important;
+	position: fixed;
+	width: 100%;
+}
+.navbar li a {
+    color: white !important;
+}
+
+.navbar li a:hover {
+    color: black !important;
+}
+
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: rgba(0,69,138,0.9) !important;
+   z-index: 1;
+   list-style: none;
+}
+
+.dropdown:hover .dropdown-content{
+   display: block;
+}
+
+.carousel-caption h4 {
+    font-style: italic;
+    text-shadow: 10px 10px 25px #000;
+}
+
+footer {
+	background-color: #00458A;
+	color: #d5d5d5;
+	font-family: Tahoma;
+	font-size: 90%;
+	line-height: 150%;
+}
+
+hr.light {
+	border-top: 0px solid #d5d5d5;
+	width: 85%;
+}
+
+.light-100 {
+	border-top: 0px solid #d5d5d5;
+	width: 100%;
+}
+
+.col-md-4 h5 {
+	font-family: Segoe UI;
+	font-size: 120%;
+}
+
+.col-12 h5 {
+    margin-top: 20px;
+	font-family: Tahoma;
+	font-size: 90%;
+}
+
+.col-12 {
+    background: #003366;
+    height: 46px;
+}
+
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.col-4 a {
+    text-decoration: none
+}
+
+.col-4 ul{
+    list-style-type:none;
+}
+.card a{
+    text-decoration: none;
+    color: #000000;
+}

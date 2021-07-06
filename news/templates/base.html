@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% load static %}
+		{% load l10n %}
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'news/style.css' %}">
+		<title>Trường THCS Hoàng Tiến</title>
+	</head>
+	<body>
+
+		<!--Navbar-->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/">
+					<img src="{% static 'news/images/logo.png' %}" height="36">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/">Giới thiệu</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/">Tin tức</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tiện ích</a>
+								<div class="dropdown-content">
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Xem thời khóa biểu</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Tính lương</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Something else here</a>
+								</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Thư viện</a>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link" ></span>
+						</li>
+						<li class="nav-item">
+							<span class="nav-link" ></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!--Carousel-->
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="{% static 'news/images/img-1.jpg' %}" class="d-block w-100" alt="First">
+					<div class="carousel-caption d-none d-md-block">
+						<h4>Khơi nguồn sáng tạo, vững bước tương lai</h4>
+						<h5>Unleash your creativity, step into the future</h5>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="{% static 'news/images/img-2.jpg' %}" class="d-block w-100" alt="Second">
+					<div class="carousel-caption d-none d-md-block">
+						<h4>Dân chủ, kỷ cương, tình thương, trách nhiệm</h4>
+						<h5>Democracy, discipline, love, responsibility</h5>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="{% static 'news/images/img-3.jpg' %}" class="d-block w-100" alt="Thirty">
+					<div class="carousel-caption d-none d-md-block">
+						<h4>Một người không đọc sách chẳng hơn gì kẻ không biết đọc</h4>
+						<h5>A person who won’t read has no advantage over one who can’t read</h5>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+
+		<!--Date time and Search-->
+		<div class="container mt-1 mb-5">
+			<div class="row my-3">
+				<div class="col-md-7">
+					{% now "D, d/m/Y - H:i" %}
+				</div>
+				<div class="col-md-5">
+					<form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="Nội dung cần tìm" aria-label="Search">
+						<button class="btn btn-sm btn-outline-secondary" type="submit">Tìm</button>
+					</form>
+				</div>
+			</div>
+			<hr>
+		</div>
+
+		<!--Container-->
+		{% block content %}
+
+		{% endblock %}
+
+		<!--Footer-->
+		<footer>
+			<div class="container-fluid padding">
+				<div class="row">
+					<div class="col-md-4">
+						<hr class="light">
+						<h5>Trường THCS Hoàng Tiến</h5>
+						<hr class="light">
+						<p>&rsaquo; Điện thoại: 0220 3 591 237</p>
+						<p>&rsaquo; Email: admin@thcshoangtien.edu.vn</p>
+						<p>&rsaquo; Địa chỉ: Phục Thiện - Hoàng Tiến - Chí Linh - Hải Dương</p>
+					</div>
+					<div class="col-md-4">
+						<hr class="light">
+						<h5>Danh hiệu</h5>
+						<hr class="light">
+						<p>&rsaquo; Trường chuẩn quốc gia mức độ 2</p>
+						<p>&rsaquo; Kiểm đinh chất lượng giáo dục cấp độ 3</p>
+						<p>&rsaquo; Thư viện Tiên tiến</p>
+					</div>
+					<div class="col-md-4">
+						<hr class="light">
+						<h5>Thiết kế website</h5>
+						<hr class="light">
+						<p>&rsaquo; Hiệu trưởng: Đỗ Mạnh Thắng</p>
+						<p>&rsaquo; Email: domanhthang@thcshoangtien.edu.vn</p>
+						<p>&rsaquo; Điện thoại: 0904 838 102</p>
+					</div>
+					<div class="col-12 text-center">
+						<h5><i>Copyright &copy; 2021 - 2022</i></h5>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Bootstrap Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+				crossorigin="anonymous"></script>
+	</body>
+</html>
