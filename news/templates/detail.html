@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container mt-3 mb-5">
+	<!--Breadcrumb-->
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+		</ol>
+	</nav>
+	<!-- Post  -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-8">
+			<div class="card mb-3">
+                <img src="/media/{{post.img}}" class="card-img-top" alt="{{post.title}}">
+			  	<div class="card-body">
+			    <h6 class="card-title">{{post.title}}</h6>
+					<p class="card-text"><i>Ngày đăng: {{post.pub_date|date:"d/m/Y - H:i"}}</i></p>
+				<hr/>
+			    <p class="card-text">{{post.detail}}</p>
+			  	<p class="card-text">{{post.body|safe|linebreaks}}</p>
+				</div>
+				<div class="card-footer" style="text-align:right">
+					<span><i>Người đăng bài: </i></span><span><i>{{post.author}}</i></span>
+				</div>
+			</div>
+
+			<!-- Comments -->
+			<div class="card my-4">
+				<h6 class="card-header">Bình luận</h6>
+				<div class="card-body">
+					{% for message in messages %}
+					<p class="text-success">{{message}}</p>
+					{% endfor %}
+					<form method="post" action="/detail/{{post.id}}">
+						{% csrf_token %}
+						<div class="form-group row">
+							<label class="col-md-2">Họ và tên<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="text" name="name" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Email<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="email" name="email" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Nội dung<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<textarea class="form-control" name="message" required></textarea>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary" value="Gửi bình luận" />
+					</form>
+				</div>
+			</div>
+			<!-- Previous Comments -->
+			<div class="card my-4">
+				<h6 class="card-header"> {{ count_comments }} bình luận</h6>
+				<div class="card-body">
+					{% for comment in comments %}
+						<p class="mb-0" style="text-align:justify">{{comment.comment}}</p>
+						<p style="text-align:right">- {{comment.name}}<cite>({{comment.email}})</cite></p>
+						<hr/>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- Related News -->
+		<div class="col-md-4">
+			<div class="card-footer">
+				<h5 class="mb-3 border-bottom pb-1">DANH SÁCH TIN BÀI</h5>
+			</div>
+			<!-- Category Box -->
+
+			{% for post in posts_list %}
+			<div class="card mb-3 shadow">
+                <img src="/media/{{post.img}}" class="card-img-top" alt="{{post.title}}">
+			  	<div class="card-body">
+					<h5 class="card-title">{{post.title}}</h5>
+					<p class="card-title"><a href="/detail/{{posts.id}}">{{post.pub_date|date:"d/m/Y - H:i"}}</a></p>
+					<hr/>
+			    <p class="card-text"><a href="/detail/{{post.id}}" class="btn btn-sm btn-primary">Xem chi tiết</a></p>
+			  	</div>
+			</div>
+			{% endfor %}
+
+			<!--Pagination-->
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-end">
+				{% if posts_list.has_previous %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ posts_list.previous_page_number }}">«</a>
+				  	</li>
+				{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
+				 	</li>
+				{% endif %}
+
+				{% if posts_list.number|add:'-2' > 1 %}
+					<li class="page-item"><a class="page-link" href="?page={{ posts_list.number|add:'-3' }}">&hellip;</a></li>
+				{% endif %}
+
+				{% for i in posts_list.paginator.page_range %}
+					{% if posts_list.number == i %}
+						<li class="page-item active" aria-current="page">
+							<span class="page-link">{{ i }}</span>
+						</li>
+					{% elif i > posts_list.number|add:'-3' and i < posts_list.number|add:'3' %}
+						<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+					{% endif %}
+				{% endfor %}
+
+				{% if posts_list.paginator.num_pages > posts_list.number|add:'2' %}
+				   <li class="page-item"><a class="page-link" href="?page={{ posts_list.number|add:'3' }}">&hellip;</a></li>
+				{% endif %}
+
+				{% if posts_list.has_next %}
+					<li class="page-item">
+						<a class="page-link" href="?page={{ posts_list.next_page_number }}">»</a>
+				 	</li>
+				{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">»</a>
+				  	</li>
+				{% endif %}
+			  </ul>
+			</nav>
+    		<!--end of Pagination-->
+
+		</div>
+	</div>
+</main>
+{% endblock %}
